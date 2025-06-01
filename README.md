@@ -84,18 +84,5 @@ Special thanks to open-source contributors and the developer community for inspi
 
 💻 Developed By
 Avrodip DAS
-Your GitHub / LinkedIn links here
-
-yaml
-Copy
-Edit
-
----
-
-Would you like a dark-mode GitHub-style banner or any custom emoji section for fun, like a "Behind the Code" or "Made with ❤️ and ☕" section? I can add that too!
-
-
-
-
 
 
