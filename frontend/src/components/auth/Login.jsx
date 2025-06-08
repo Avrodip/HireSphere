@@ -8,9 +8,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { USER_API_END_POINT } from '@/utils/constant';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoading } from '@/redux/authSlice';
+import { Loader2 } from 'lucide-react';
 
 const Login = () => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { loading } = useSelector(store => store.auth);
     // Step 1: Create state for form fields
     const [input, setInput] = useState({
         email: '',
@@ -26,6 +31,7 @@ const Login = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
+            dispatch(setLoading(true))
             const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
                 headers: {
                     "Content-Type": "application/json"
@@ -41,6 +47,9 @@ const Login = () => {
         } catch (error) {
             toast.error(error.response.data.message);
             console.log("error", error);
+        }
+        finally {
+            dispatch(setLoading(false));
         }
     }
 
@@ -102,9 +111,11 @@ const Login = () => {
                             </div>
                         </RadioGroup>
                     </div>
+                    {
+                        loading ? <Button className="w-full my-4"><Loader2 className='mr-2 h-4 w-4 animate-spin' />Please wait</Button> : <Button type="submit" className="w-full my-1 cursor-pointer">Login</Button>
+                    }
 
                     {/* Submit Button */}
-                    <Button type="submit" className="w-full my-1 cursor-pointer">Login</Button>
 
                     {/* Redirect to Signup */}
                     <span className='text-sm'>
